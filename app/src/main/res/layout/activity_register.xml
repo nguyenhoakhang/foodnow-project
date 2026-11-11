@@ -1,0 +1,129 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/registerRoot"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="?attr/colorSurface">
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:fillViewport="true">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:padding="20dp">
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="@string/register_title"
+                android:textAppearance="@style/FoodNow.ScreenTitle" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="@string/ui_account_details"
+                android:textAppearance="@style/FoodNow.SectionTitle" android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/registerEmailInput"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:hint="@string/email"
+                app:boxCornerRadiusTopStart="14dp" app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp" app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="@color/ui_background">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/registerEmail" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:inputType="textEmailAddress"
+                    android:background="@null" android:padding="16dp" android:minHeight="56dp"
+                    android:textColor="@color/ui_text" android:textColorHint="@color/ui_muted" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/registerPasswordInput"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:hint="@string/password"
+                app:boxCornerRadiusTopStart="14dp" app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp" app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="@color/ui_background" app:endIconMode="password_toggle">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/registerPassword" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:inputType="textPassword"
+                    android:background="@null" android:padding="16dp" android:minHeight="56dp"
+                    android:textColor="@color/ui_text" android:textColorHint="@color/ui_muted" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/registerNameInput"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:hint="@string/profile_name"
+                app:boxCornerRadiusTopStart="14dp" app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp" app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="@color/ui_background">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/registerName" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:inputType="textPersonName"
+                    android:maxLength="100" android:background="@null" android:padding="16dp"
+                    android:minHeight="56dp" android:textColor="@color/ui_text"
+                    android:textColorHint="@color/ui_muted" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/registerPhoneInput"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:hint="@string/profile_phone"
+                app:boxCornerRadiusTopStart="14dp" app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp" app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="@color/ui_background">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/registerPhone" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:inputType="phone"
+                    android:maxLength="30" android:background="@null" android:padding="16dp"
+                    android:minHeight="56dp" android:textColor="@color/ui_text"
+                    android:textColorHint="@color/ui_muted" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/registerAddressInput"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:hint="@string/profile_address"
+                app:boxCornerRadiusTopStart="14dp" app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp" app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="@color/ui_background">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/registerAddress" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:inputType="textPostalAddress"
+                    android:maxLength="300" android:background="@null" android:padding="16dp"
+                    android:minHeight="56dp" android:textColor="@color/ui_text"
+                    android:textColorHint="@color/ui_muted" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="@string/ui_choose_role"
+                android:textAppearance="@style/FoodNow.SectionTitle" android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp" />
+            <RadioGroup android:id="@+id/registerRole" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:orientation="horizontal"
+                android:checkedButton="@id/roleCustomer">
+                <RadioButton android:id="@+id/roleCustomer" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="@string/role_customer" />
+                <RadioButton android:id="@+id/roleDriver" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="@string/role_driver" />
+            </RadioGroup>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/registerVehicleInput"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:hint="@string/profile_vehicle"
+                app:boxCornerRadiusTopStart="14dp" app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp" app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="@color/ui_background" android:visibility="gone">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/registerVehicle" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:inputType="text"
+                    android:maxLength="100" android:background="@null" android:padding="16dp"
+                    android:minHeight="56dp" android:textColor="@color/ui_text"
+                    android:textColorHint="@color/ui_muted" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button android:id="@+id/createAccount" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:text="@string/register_title"
+                android:layout_marginTop="8dp" />
+            <ProgressBar android:id="@+id/registerProgress" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_gravity="center"
+                android:visibility="gone" />
+            <TextView android:id="@+id/registerMessage" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:accessibilityLiveRegion="polite" />
+        </LinearLayout>
+    </ScrollView>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:gravity="center" android:padding="10dp" android:text="@string/student_identity"
+        android:textSize="11sp" android:textColor="@color/ui_muted" />
+</LinearLayout>

@@ -1,0 +1,214 @@
+<resources>
+    <string name="app_name">FoodNow</string>
+    <string name="channel_orders">Đơn hàng</string>
+
+
+    <string name="student_identity">524H0098 - Nguyễn Hòa Khang</string>
+
+    <string name="email">Email</string>
+
+    <string name="password">Mật khẩu</string>
+
+    <string name="sign_in">Đăng nhập</string>
+
+    <string name="sign_out">Đăng xuất</string>
+
+    <string name="reset_password">Quên mật khẩu?</string>
+    <string name="sign_in_google">Đăng nhập bằng Google</string>
+
+
+    <string name="auth_error">Không thể hoàn tất. Kiểm tra thông tin và kết nối rồi thử lại.</string>
+
+
+    <string name="search_restaurants">Tìm tên hoặc địa chỉ</string>
+
+    <string name="catalog_empty">Chưa có nhà hàng phù hợp.</string>
+
+    <string name="catalog_error">Không tải được nhà hàng. Kiểm tra kết nối hoặc quyền truy cập.</string>
+
+    <string name="catalog_cached">Đang hiển thị dữ liệu lưu trên thiết bị; có thể chưa cập nhật.</string>
+
+    <string name="catalog_cached_empty">Không có dữ liệu nhà hàng lưu trên thiết bị. Kiểm tra kết
+        nối.</string>
+
+    <string name="retry">Thử lại</string>
+
+    <string name="restaurant_closed">Tạm ngừng hoạt động</string>
+
+    <string name="restaurant_open_now">Đang mở cửa</string>
+
+    <string name="restaurant_closed_now">Đã đóng cửa</string>
+
+    <string name="restaurant_hours_unknown">Chưa xác định giờ hoạt động</string>
+
+    <string name="restaurant_hours">Giờ mở cửa: %1$s - %2$s</string>
+
+    <string name="back">Quay lại</string>
+
+    <string name="menu_title">Thực đơn</string>
+
+    <string name="menu_empty">Nhà hàng chưa có món ăn.</string>
+
+    <string name="menu_unavailable">Tạm hết món</string>
+
+    <string name="restaurant_missing">Không tìm thấy nhà hàng.</string>
+
+    <string name="add_to_cart">Thêm món</string>
+
+    <string name="cart_empty">Giỏ hàng trống</string>
+
+    <string name="cart_summary">Giỏ hàng: %1$d món · %2$s</string>
+
+
+    <string name="cart_replace">Giỏ hiện tại thuộc nhà hàng khác. Xóa giỏ cũ và thêm món này?</string>
+
+    <string name="confirm">Đồng ý</string>
+
+    <string name="cancel">Hủy</string>
+
+
+    <string name="cart_error">Không thể cập nhật giỏ hàng.</string>
+
+    <string name="cart_limit">Mỗi món tối đa 99 phần.</string>
+
+    <string name="register_title">Đăng ký</string>
+
+    <string name="profile_name">Họ và tên</string>
+
+    <string name="profile_phone">Số điện thoại</string>
+
+    <string name="profile_address">Địa chỉ</string>
+
+    <string name="profile_vehicle">Phương tiện</string>
+
+    <string name="role_customer">Khách hàng</string>
+
+    <string name="role_driver">Tài xế</string>
+
+    <string name="registration_details_required">Vui lòng điền đầy đủ thông tin. Mật khẩu cần ít
+        nhất 6 ký tự.</string>
+
+    <string name="registration_profile_failed">Tạo hồ sơ chưa thành công. Vui lòng thử lại khi có
+        mạng.</string>
+
+    <string name="registration_auth_failed">Không thể tạo tài khoản. Kiểm tra email, mật khẩu và kết
+        nối.</string>
+
+    <string name="checkout_title">Xác nhận đơn hàng</string>
+
+    <string name="recipient">Tên người nhận</string>
+
+    <string name="order_note">Ghi chú cho tài xế</string>
+
+    <string name="payment_cod">Thanh toán khi nhận hàng (COD)</string>
+
+    <string name="place_order">Đặt hàng</string>
+
+    <string name="delivery_fee">Phí giao hàng: %1$s</string>
+
+    <string name="checkout_invalid">Kiểm tra giỏ hàng và thông tin giao hàng. Tối đa 4 món khác
+        nhau.</string>
+
+    <string name="checkout_error">Không thể đặt hàng. Kiểm tra hồ sơ, giá, trạng thái cửa hàng và
+        kết nối.</string>
+
+    <string name="order_success_title">Đặt hàng thành công!</string>
+    <string name="order_success_body">Đơn hàng đã được ghi nhận. Theo dõi trạng thái trong mục Đơn
+        hàng.</string>
+    <string name="order_success_close">Đã hiểu</string>
+
+
+    <string name="orders_title">Đơn hàng</string>
+
+    <string name="no_active_order">Chưa có đơn đang thực hiện.</string>
+
+    <string name="driver_not_approved">Tài khoản tài xế đang chờ duyệt.</string>
+
+    <string name="turn_on">Bật nhận đơn</string>
+    <string name="turn_off">Tắt nhận đơn</string>
+
+    <string name="offers">Xem đơn đang chờ</string>
+    <string name="no_offers">Chưa có đơn đang chờ.</string>
+
+    <string name="release_order">Trả đơn</string>
+    <string name="cancel_order">Hủy đơn</string>
+    <string name="driver_cancel_confirm">Hủy đơn này? Khách hàng sẽ thấy đơn đã hủy.</string>
+    <string name="track_live">Theo dõi trực tiếp</string>
+    <string name="live_tracking_title">Theo dõi giao hàng</string>
+    <string name="live_tracking_waiting">Đang chờ tài xế cập nhật vị trí.</string>
+    <string name="live_tracking_unavailable">Chưa có vị trí để hiển thị bản đồ.</string>
+
+    <string name="picked_up">Đã lấy món</string>
+    <string name="start_delivery">Bắt đầu giao</string>
+    <string name="complete_order">Đã giao và thu tiền</string>
+
+    <string name="order_operation_error">Không thực hiện được. Đơn có thể đã thay đổi; kiểm tra kết
+        nối và thử lại.</string>
+
+    <string name="order_status_searching">Đang tìm tài xế</string>
+    <string name="order_status_accepted">Tài xế đã nhận đơn</string>
+    <string name="order_status_picked_up">Đã lấy món</string>
+    <string name="order_status_delivering">Đang giao hàng</string>
+    <string name="order_status_completed">Đã hoàn tất</string>
+    <string name="order_status_cancelled">Đã hủy</string>
+
+    <string name="chat_title">Tin nhắn</string>
+    <string name="chat_hint">Nhập tin nhắn</string>
+    <string name="chat_send">Gửi</string>
+
+    <string name="chat_failed">Gửi thất bại. Kiểm tra mạng và thử lại.</string>
+    <string name="chat_empty">Chưa có tin nhắn.</string>
+
+    <string name="chat_me">Tôi</string>
+    <string name="chat_other">Đối phương</string>
+
+    <string name="home_intro">Món ngon gần bạn, giao tận nơi</string>
+    <string name="home_restaurants">Nhà hàng dành cho bạn</string>
+    <string name="call_recipient">Gọi người nhận</string>
+    <string name="chat_pending">Đang gửi</string>
+    <string name="profile_save">Lưu thông tin</string>
+    <string name="profile_saved">Đã lưu thông tin.</string>
+    <string name="current_password">Mật khẩu hiện tại</string>
+    <string name="new_password">Mật khẩu mới</string>
+    <string name="change_password">Đổi mật khẩu</string>
+    <string name="password_changed">Đã đổi mật khẩu.</string>
+    <string name="chat_older">Xem tin nhắn cũ</string>
+    <string name="order_history">Lịch sử giao hàng</string>
+    <string name="checkout_total">Tổng thanh toán: %1$s</string>
+    <string name="use_location">Dùng vị trí hiện tại</string>
+    <string name="location_review">Đã lấy tọa độ. Thêm số nhà, tầng và chỉ dẫn vào ghi chú.</string>
+    <string name="location_permission">Cho phép vị trí trong Cài đặt hoặc nhập địa chỉ.</string>
+    <string name="location_unavailable">Không lấy được vị trí. Bật GPS hoặc nhập địa chỉ.</string>
+    <string name="location_loading">Đang lấy vị trí...</string>
+    <string name="open_delivery_map">Mở bản đồ giao hàng</string>
+    <string name="profile_avatar">Chọn ảnh đại diện (lưu trên thiết bị)</string>
+    <string name="accept_delivery">Nhận giao đơn này</string>
+    <string name="priority_offer">Đơn ưu tiên cho bạn</string>
+    <string name="driver_workspace">Đơn giao hôm nay</string>
+    <string name="sign_in_missing_fields">Vui lòng nhập email và mật khẩu.</string>
+    <string name="password_reset_email_hint">Nhập email để đặt lại mật khẩu.</string>
+    <string name="password_reset_email_sent">Kiểm tra email đặt lại mật khẩu.</string>
+    <string name="password_reset_email_failed">Không thể gửi email đặt lại mật khẩu.</string>
+    <string name="sign_in_failed">Đăng nhập thất bại: %1$s</string>
+    <string name="profile_check_failed">Không thể kiểm tra tài khoản. Vui lòng kiểm tra kết nối và
+        thử lại.</string>
+    <string name="orders_login_required">Vui lòng đăng nhập để xem đơn hàng.</string>
+    <string name="orders_loading">Đang tải đơn hàng...</string>
+    <string name="orders_load_failed">Không tải được đơn hàng. Vui lòng thử lại sau.</string>
+    <string name="orders_empty">Chưa có đơn hàng nào. Khám phá món ngon nhé!</string>
+    <string name="order_number">Đơn #%1$s</string>
+    <string name="order_deliver_to">Giao đến · %1$s</string>
+    <string name="address_missing">Chưa có địa chỉ</string>
+    <string name="order_details_description">Xem chi tiết đơn %1$s</string>
+    <string name="status_updating">Đang cập nhật</string>
+    <string name="tracking_status_line">%1$s · %2$s</string>
+    <string name="order_cod">COD: %1$s VND</string>
+    <string name="order_item_summary">%1$d x %2$s</string>
+    <string name="food_price_line">%1$s
+        %2$s</string>
+    <string name="driver_eyebrow">FOODNOW DRIVER</string>
+    <string name="driver_subtitle">Nhận đơn, giao món và theo dõi hành trình.</string>
+    <string name="driver_nav_history">Lịch sử</string>
+    <string name="account_eyebrow">TÀI KHOẢN</string>
+    <string name="account_subtitle">Thông tin liên hệ và bảo mật tài khoản.</string>
+</resources>

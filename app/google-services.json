@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "652147422112",
+    "project_id": "nhk-foodnow",
+    "storage_bucket": "nhk-foodnow.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652147422112:android:3b7e37de1e8a206c7b6ac5",
+        "android_client_info": {
+          "package_name": "com.example.a524h0098_nguyenhoakhang_foodnow_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "652147422112-flc48blse9m2hlpvrqc90smjen3cvb27.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.a524h0098_nguyenhoakhang_foodnow_project",
+            "certificate_hash": "b93a075752f3c9ab19b018eaa5b259f00cc63abc"
+          }
+        },
+        {
+          "client_id": "652147422112-dupi0tirg904cnlp4fdien4p3f2aj45v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoy06ck_bcaO_POtLn0OmXjYkvCT7w6MU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "652147422112-dupi0tirg904cnlp4fdien4p3f2aj45v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

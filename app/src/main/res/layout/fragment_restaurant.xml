@@ -1,0 +1,126 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="28dp"
+        android:paddingBottom="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textColor="#00B14F"
+            android:textSize="34sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/ui_hero_greeting"
+            android:textAppearance="?attr/textAppearanceHeadlineSmall"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/home_intro"
+            android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="164dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/bg_hero"
+            android:clipToOutline="true">
+
+            <ImageView
+                android:layout_width="158dp"
+                android:layout_height="158dp"
+                android:layout_gravity="end|bottom"
+                android:contentDescription="@null"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dish" />
+
+            <LinearLayout
+                android:layout_width="220dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.08"
+                    android:text="@string/ui_hero_eyebrow"
+                    android:textColor="#C5EFD3"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/ui_hero_title"
+                    android:textColor="#FFFFFF"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/ui_hero_subtitle"
+                    android:textColor="#D4F3DA"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <EditText
+            android:id="@+id/catalogSearch"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/bg_delivery_input"
+            android:drawableStart="@drawable/ic_ui_search"
+            android:drawablePadding="12dp"
+            android:hint="@string/search_restaurants"
+            android:inputType="text"
+            android:minHeight="56dp"
+            android:padding="16dp"
+            android:singleLine="true"
+            android:textColor="@color/ui_text"
+            android:textColorHint="@color/ui_muted" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/home_restaurants"
+            android:textAppearance="?attr/textAppearanceHeadlineSmall"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/catalogMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:accessibilityLiveRegion="polite" />
+
+        <LinearLayout
+            android:id="@+id/storeList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </LinearLayout>
+</ScrollView>

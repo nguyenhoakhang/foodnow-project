@@ -1,0 +1,9 @@
+<resources>
+    <color name="ui_background">#FFFFFF</color>
+    <color name="ui_surface">#F5F7F6</color>
+    <color name="ui_text">#000000</color>
+    <color name="ui_muted">#59665F</color>
+    <color name="ui_border">#DFE6E1</color>
+    <color name="ui_tint">#E6F7ED</color>
+    <color name="ui_accent">#00B14F</color>
+</resources>

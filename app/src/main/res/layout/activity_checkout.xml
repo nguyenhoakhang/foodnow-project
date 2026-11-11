@@ -1,0 +1,99 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/checkoutRoot"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="?attr/colorSurface">
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:fillViewport="true">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:padding="20dp">
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="@string/checkout_title"
+                android:textAppearance="@style/FoodNow.ScreenTitle" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="@string/ui_order_summary"
+                android:textAppearance="@style/FoodNow.SectionTitle" android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp" />
+            <TextView android:id="@+id/checkoutItems" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="16dp"
+                android:background="@drawable/bg_search_foodnow" android:padding="18dp" />
+            <TextView android:id="@+id/checkoutFee" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="12dp" />
+            <TextView android:id="@+id/checkoutTotal" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="12dp"
+                android:textAppearance="?attr/textAppearanceTitleLarge" android:textStyle="bold"
+                android:background="@drawable/bg_search_foodnow" android:padding="18dp" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="@string/ui_delivery_details"
+                android:textAppearance="@style/FoodNow.SectionTitle" android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp" />
+            <com.google.android.material.textfield.TextInputLayout android:id="@+id/recipientInput"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:hint="@string/recipient"
+                app:boxCornerRadiusTopStart="14dp" app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp" app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="@color/ui_background">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/recipient"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:inputType="textPersonName" android:maxLength="100"
+                    android:background="@null" android:padding="16dp" android:minHeight="56dp"
+                    android:textColor="@color/ui_text" android:textColorHint="@color/ui_muted" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout android:id="@+id/phoneInput"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:hint="@string/profile_phone"
+                app:boxCornerRadiusTopStart="14dp" app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp" app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="@color/ui_background">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/phone"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:inputType="phone" android:maxLength="30" android:background="@null"
+                    android:padding="16dp" android:minHeight="56dp"
+                    android:textColor="@color/ui_text" android:textColorHint="@color/ui_muted" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout android:id="@+id/addressInput"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:hint="@string/profile_address"
+                app:boxCornerRadiusTopStart="14dp" app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp" app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="@color/ui_background">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/address"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:inputType="textPostalAddress" android:maxLength="300"
+                    android:background="@null" android:padding="16dp" android:minHeight="56dp"
+                    android:textColor="@color/ui_text" android:textColorHint="@color/ui_muted" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button android:id="@+id/useLocation" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:text="@string/use_location"
+                android:layout_marginTop="8dp" style="@style/FoodNow.Secondary" />
+            <com.google.android.material.textfield.TextInputLayout android:id="@+id/noteInput"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:hint="@string/order_note"
+                app:boxCornerRadiusTopStart="14dp" app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp" app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="@color/ui_background">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/note"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:inputType="textCapSentences" android:maxLength="500"
+                    android:background="@null" android:padding="16dp" android:minHeight="56dp"
+                    android:textColor="@color/ui_text" android:textColorHint="@color/ui_muted" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="@string/payment_cod" android:layout_marginTop="12dp" />
+            <Button android:id="@+id/placeOrder" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:text="@string/place_order"
+                android:enabled="false" android:layout_marginTop="8dp" />
+            <ProgressBar android:id="@+id/checkoutProgress" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_gravity="center"
+                android:visibility="gone" />
+            <TextView android:id="@+id/checkoutMessage" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:accessibilityLiveRegion="polite" />
+        </LinearLayout>
+    </ScrollView>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:gravity="center" android:padding="10dp" android:text="@string/student_identity"
+        android:textSize="11sp" android:textColor="@color/ui_muted" />
+</LinearLayout>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <style>
+      html,
+      body,
+      #map {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        font-family: system-ui, sans-serif;
+        background: #f5f7f6;
+      }
+      #eta {
+        position: absolute;
+        z-index: 500;
+        left: 14px;
+        right: 14px;
+        bottom: 16px;
+        padding: 12px 16px;
+        border-radius: 14px;
+        background: #ffffff;
+        border: 1px solid #dfe6e1;
+        color: #000000;
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .driver-dot {
+        fill: #00b14f;
+        stroke: #ffffff;
+        stroke-width: 3;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="eta">Đang tải bản đồ...</div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+      const map = L.map("map", { zoomControl: true }).setView(
+        [10.7769, 106.7009],
+        13,
+      );
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "&copy; OpenStreetMap",
+      }).addTo(map);
+
+      let destination = null;
+      let driver = null;
+      let destinationMarker = null;
+      let driverMarker = null;
+      let routeLine = null;
+      let routeKey = "";
+
+      function setEta(text) {
+        document.getElementById("eta").textContent = text;
+      }
+
+      function drawDestination() {
+        if (!destination) return;
+        if (destinationMarker) destinationMarker.remove();
+        destinationMarker = L.marker([destination.lat, destination.lng])
+          .addTo(map)
+          .bindPopup("Điểm giao");
+        if (!driver) map.setView([destination.lat, destination.lng], 15);
+      }
+
+      function drawDriver() {
+        if (!driver) return;
+        if (driverMarker) driverMarker.remove();
+        driverMarker = L.circleMarker([driver.lat, driver.lng], {
+          radius: 9,
+          className: "driver-dot",
+          color: "#ffffff",
+          weight: 3,
+          fillColor: "#00B14F",
+          fillOpacity: 1,
+        })
+          .addTo(map)
+          .bindPopup("Tài xế");
+      }
+
+      window.clearDriver = function () {
+        driver = null;
+        if (driverMarker) {
+          driverMarker.remove();
+          driverMarker = null;
+        }
+        if (routeLine) {
+          routeLine.remove();
+          routeLine = null;
+        }
+        routeKey = "";
+        setEta("Đang chờ tài xế cập nhật vị trí.");
+      };
+
+      async function drawRoute() {
+        if (!destination || !driver) {
+          setEta(
+            destination
+              ? "Đang chờ tài xế cập nhật vị trí."
+              : "Chưa có điểm giao.",
+          );
+          return;
+        }
+        const key = `${driver.lat.toFixed(5)},${driver.lng.toFixed(5)};${destination.lat.toFixed(5)},${destination.lng.toFixed(5)}`;
+        if (routeKey === key) return;
+        routeKey = key;
+        try {
+          const url = `https://router.project-osrm.org/route/v1/driving/${driver.lng},${driver.lat};${destination.lng},${destination.lat}?overview=full&geometries=geojson`;
+          const response = await fetch(url);
+          const data = await response.json();
+          if (!data.routes || !data.routes.length) throw new Error("no route");
+          const route = data.routes[0];
+          if (routeLine) routeLine.remove();
+          routeLine = L.geoJSON(route.geometry, {
+            style: { color: "#00B14F", weight: 5, opacity: 0.85 },
+          }).addTo(map);
+          map.fitBounds(routeLine.getBounds(), { padding: [30, 30] });
+          const km = (route.distance / 1000).toFixed(1);
+          const minutes = Math.max(1, Math.round(route.duration / 60));
+          setEta(`${km} km · khoảng ${minutes} phút`);
+        } catch (error) {
+          setEta("Không tải được tuyến đường. Đang hiển thị vị trí.");
+        }
+      }
+
+      window.setDestination = function (lat, lng) {
+        destination = { lat, lng };
+        drawDestination();
+        drawRoute();
+      };
+
+      window.updateDriver = function (lat, lng) {
+        driver = { lat, lng };
+        drawDriver();
+        drawRoute();
+      };
+
+      window.setMessage = function (text) {
+        setEta(text);
+      };
+
+      window.setViewTo = function (lat, lng) {
+        map.setView([lat, lng], 15);
+      };
+    </script>
+  </body>
+</html>

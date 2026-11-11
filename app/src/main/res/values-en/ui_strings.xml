@@ -1,0 +1,22 @@
+<resources>
+    <string name="ui_welcome">Good food. At your door.</string>
+    <string name="ui_account_details">Account details</string>
+    <string name="ui_choose_role">Use FoodNow as</string>
+    <string name="ui_order_summary">Your order</string>
+    <string name="ui_delivery_details">Delivery details</string>
+    <string name="ui_security">Security</string>
+    <string name="ui_orders_heading">Your orders</string>
+    <string name="ui_orders_subtitle">Track your delivery and revisit past orders.</string>
+    <string name="ui_explore">Explore</string>
+    <string name="ui_orders">Orders</string>
+    <string name="ui_account">Account</string>
+    <string name="ui_cart_title">Your basket</string>
+    <string name="ui_increase_quantity">Add one %1$s</string>
+    <string name="ui_decrease_quantity">Remove one %1$s</string>
+    <string name="ui_subtotal">Subtotal: %1$s</string>
+    <string name="ui_view_order">View details</string>
+    <string name="ui_hero_eyebrow">GOOD FOOD DAILY</string>
+    <string name="ui_hero_title">A little treat,\na better day.</string>
+    <string name="ui_hero_subtitle">Choose your favourites</string>
+    <string name="ui_hero_greeting">What are you eating today?</string>
+</resources>

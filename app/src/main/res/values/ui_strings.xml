@@ -1,0 +1,22 @@
+<resources>
+    <string name="ui_welcome">Bữa ngon, giao tận cửa.</string>
+    <string name="ui_account_details">Thông tin tài khoản</string>
+    <string name="ui_choose_role">Bạn sử dụng FoodNow để</string>
+    <string name="ui_order_summary">Đơn hàng của bạn</string>
+    <string name="ui_delivery_details">Giao đến đâu?</string>
+    <string name="ui_security">Bảo mật</string>
+    <string name="ui_orders_heading">Đơn hàng của bạn</string>
+    <string name="ui_orders_subtitle">Theo dõi đơn hiện tại và xem lại những bữa ngon.</string>
+    <string name="ui_explore">Khám phá</string>
+    <string name="ui_orders">Đơn hàng</string>
+    <string name="ui_account">Tài khoản</string>
+    <string name="ui_cart_title">Giỏ hàng của bạn</string>
+    <string name="ui_increase_quantity">Thêm một phần %1$s</string>
+    <string name="ui_decrease_quantity">Bớt một phần %1$s</string>
+    <string name="ui_subtotal">Tạm tính: %1$s</string>
+    <string name="ui_view_order">Xem chi tiết</string>
+    <string name="ui_hero_eyebrow">MÓN NGON MỖI NGÀY</string>
+    <string name="ui_hero_title">Một chút ngon,\ncả ngày vui.</string>
+    <string name="ui_hero_subtitle">Chọn món yêu thích</string>
+    <string name="ui_hero_greeting">Hôm nay ăn gì?</string>
+</resources>

@@ -1,0 +1,132 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="@color/ui_background"
+    android:fillViewport="true">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="20dp">
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:letterSpacing="0.12" android:text="@string/account_eyebrow"
+            android:textColor="@color/ui_accent" android:textSize="12sp" android:textStyle="bold" />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="6dp" android:text="@string/ui_account"
+            android:textAppearance="@style/FoodNow.ScreenTitle" />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="6dp" android:text="@string/account_subtitle"
+            android:textAppearance="@style/FoodNow.Muted" />
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="22dp" android:background="@drawable/bg_surface"
+            android:gravity="center_horizontal" android:orientation="vertical"
+            android:padding="22dp">
+            <ImageView android:id="@+id/profileAvatar" android:layout_width="88dp"
+                android:layout_height="88dp" android:background="@drawable/bg_pill_green"
+                android:clipToOutline="true" android:contentDescription="@string/profile_avatar"
+                android:scaleType="centerCrop" android:src="@drawable/ic_ui_person" />
+            <TextView android:id="@+id/profileEmail" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="14dp"
+                android:gravity="center" android:textColor="@color/ui_muted" android:textSize="14sp" />
+            <Button android:id="@+id/profileChooseAvatar" style="@style/FoodNow.Secondary"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:text="@string/profile_avatar" />
+        </LinearLayout>
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="24dp" android:text="@string/ui_account_details"
+            android:textAppearance="@style/FoodNow.SectionTitle" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" android:background="@drawable/bg_surface"
+            android:orientation="vertical" android:padding="18dp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/profileEditNameInput"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:hint="@string/profile_name" app:boxBackgroundColor="@color/ui_background"
+                app:boxCornerRadiusBottomEnd="14dp" app:boxCornerRadiusBottomStart="14dp"
+                app:boxCornerRadiusTopEnd="14dp" app:boxCornerRadiusTopStart="14dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profileEditName" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:background="@null"
+                    android:inputType="textPersonName" android:maxLength="100"
+                    android:minHeight="56dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/profileEditPhoneInput"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:hint="@string/profile_phone"
+                app:boxBackgroundColor="@color/ui_background" app:boxCornerRadiusBottomEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp" app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusTopStart="14dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profileEditPhone" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:background="@null"
+                    android:inputType="phone" android:maxLength="30" android:minHeight="56dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/profileEditAddressInput"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:hint="@string/profile_address"
+                app:boxBackgroundColor="@color/ui_background" app:boxCornerRadiusBottomEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp" app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusTopStart="14dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profileEditAddress" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:background="@null"
+                    android:inputType="textPostalAddress" android:maxLength="300"
+                    android:minHeight="56dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button android:id="@+id/profileSaveChanges" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="16dp"
+                android:text="@string/profile_save" />
+            <TextView android:id="@+id/profileFeedback" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="8dp"
+                android:accessibilityLiveRegion="polite" android:textColor="@color/ui_muted" />
+        </LinearLayout>
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="24dp" android:text="@string/ui_security"
+            android:textAppearance="@style/FoodNow.SectionTitle" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" android:background="@drawable/bg_surface"
+            android:orientation="vertical" android:padding="18dp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/profileCurrentPasswordInput"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:hint="@string/current_password"
+                app:boxBackgroundColor="@color/ui_background" app:boxCornerRadiusBottomEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp" app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusTopStart="14dp" app:endIconMode="password_toggle">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profileCurrentPassword" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:autofillHints="password"
+                    android:background="@null" android:inputType="textPassword"
+                    android:minHeight="56dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/profileNewPasswordInput"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:hint="@string/new_password"
+                app:boxBackgroundColor="@color/ui_background" app:boxCornerRadiusBottomEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp" app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusTopStart="14dp" app:endIconMode="password_toggle">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profileNewPassword" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:autofillHints="newPassword"
+                    android:background="@null" android:inputType="textPassword"
+                    android:minHeight="56dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button android:id="@+id/profileChangePassword" style="@style/FoodNow.Secondary"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="14dp" android:text="@string/change_password" />
+        </LinearLayout>
+
+        <Button android:id="@+id/profileLogout" style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="18dp" android:text="@string/sign_out" />
+
+    </LinearLayout>
+</ScrollView>

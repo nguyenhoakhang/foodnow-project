@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/main"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@color/ui_background">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="56dp"
+        android:background="@color/ui_background" android:gravity="center_vertical"
+        android:paddingHorizontal="12dp" android:elevation="2dp">
+        <Button android:id="@+id/back" style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textColor="#00B14F" android:text="@string/back" android:layout_marginTop="8dp" />
+    </LinearLayout>
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:fillViewport="true">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:padding="20dp">
+            <ImageView android:id="@+id/cover" android:layout_width="match_parent"
+                android:layout_height="180dp" android:scaleType="centerCrop"
+                android:contentDescription="@null" android:visibility="gone" />
+            <TextView android:id="@+id/name" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="12dp"
+                android:textColor="@color/ui_text" android:textSize="22sp" android:textStyle="bold" />
+            <TextView android:id="@+id/address" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="6dp"
+                android:textColor="@color/ui_muted" android:textSize="14sp" />
+            <TextView android:id="@+id/hours" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="6dp"
+                android:textColor="@color/ui_muted" android:textSize="13sp" />
+            <TextView android:id="@+id/restaurantStatus" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="6dp"
+                android:textColor="#00B14F" android:textSize="13sp" android:textStyle="bold" />
+            <View android:layout_width="match_parent" android:layout_height="1dp"
+                android:layout_marginTop="16dp" android:layout_marginBottom="16dp"
+                android:background="@color/ui_border" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="@string/menu_title"
+                android:textAppearance="@style/FoodNow.SectionTitle" />
+            <ProgressBar android:id="@+id/progress" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp" android:indeterminateTint="#00B14F" />
+            <TextView android:id="@+id/status" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="12dp"
+                android:textColor="@color/ui_muted" android:accessibilityLiveRegion="polite" />
+            <Button android:id="@+id/retry" style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:textColor="#00B14F" android:text="@string/retry" android:visibility="gone"
+                android:layout_marginTop="8dp" />
+            <androidx.recyclerview.widget.RecyclerView android:id="@+id/menu"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:nestedScrollingEnabled="false" />
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:background="@color/ui_background" android:padding="16dp" android:elevation="8dp"
+        android:orientation="vertical">
+        <Button android:id="@+id/viewCart" style="@style/Widget.Material3.Button"
+            android:layout_width="match_parent" android:layout_height="52dp"
+            android:backgroundTint="#00B14F" android:textColor="#FFFFFF"
+            android:text="@string/cart_empty" android:textSize="16sp" android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:background="@color/ui_background" android:gravity="center" xml:space="preserve"
+        android:paddingBottom="8dp" android:text="@string/student_identity"
+        android:textColor="@color/ui_muted" android:textSize="11sp" android:padding="10dp" />
+</LinearLayout>

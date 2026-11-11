@@ -1,0 +1,32 @@
+{
+  "app": "FoodNow",
+  "version": "1.0",
+  "type": "debug demo APK",
+  "firebaseProject": "nhk-foodnow",
+  "applicationId": "com.example.a524h0098_nguyenhoakhang_foodnow_project",
+  "builtFrom": "app module in FoodNow root",
+  "packagedAt": "2026-11-11T15:52:31.163Z",
+  "sha256": "0c4f76d0fffb9a3f9acf4d4f64c8170d02244e1ba68903b7ab20bfb938133fce",
+  "verification": [
+    "assembleDebug passed",
+    "testDebugUnitTest passed",
+    "lintDebug passed with zero unused resources",
+    "Firestore Emulator rules suite passed, including reserved priority offers",
+    "ADB install -r on Samsung test device: Success",
+    "Hosting deployed: https://nhk-foodnow.web.app"
+  ],
+  "limits": "Xem delivery/HUONG_DAN.md; chưa kiểm thử hai thiết bị và chưa deploy FCM (cần Blaze).",
+  "addedFeatures": [
+    "Google sign-in",
+    "Nearest-driver dispatch with geocoding",
+    "Live tracking with OpenStreetMap and OSRM ETA",
+    "Driver cancel after pickup",
+    "Admin web driver, user and menu management",
+    "Auto-approved driver registration with admin lock",
+    "Docked driver navigation",
+    "Account screen refresh",
+    "Unified order detail actions"
+  ],
+  "driverUI": "DriverActivity with live offer cards and shared secure transaction workflow",
+  "ui": "Customer and Driver screens, outlined labeled forms, restaurant cards, quantity basket, delivery timeline, chat bubbles, light and dark themes"
+}

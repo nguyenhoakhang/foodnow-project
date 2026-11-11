@@ -1,0 +1,20 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="wrap_content" android:background="@drawable/bg_delivery_dialog"
+    android:orientation="vertical" android:gravity="center_horizontal" android:padding="28dp">
+    <ImageView android:layout_width="72dp" android:layout_height="72dp"
+        android:background="@drawable/bg_success_icon" android:contentDescription="@null"
+        android:padding="16dp" android:src="@drawable/ic_ui_check"
+        android:importantForAccessibility="no" app:tint="@color/ui_accent" />
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="22dp" android:gravity="center"
+        android:text="@string/order_success_title"
+        android:textAppearance="@style/FoodNow.SectionTitle" />
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" android:gravity="center" android:lineSpacingExtra="4dp"
+        android:text="@string/order_success_body"
+        android:textAppearance="?attr/textAppearanceBodyMedium" />
+    <Button android:id="@+id/closeSuccess" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:layout_marginTop="26dp"
+        android:text="@string/order_success_close" />
+</LinearLayout>

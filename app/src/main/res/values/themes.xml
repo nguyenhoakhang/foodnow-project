@@ -1,0 +1,64 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.Project_FoodApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/ui_accent</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSecondary">@color/ui_accent</item>
+        <item name="colorSurface">@color/ui_background</item>
+        <item name="colorOnSurface">@color/ui_text</item>
+        <item name="colorOnSurfaceVariant">@color/ui_muted</item>
+        <item name="colorOnBackground">@color/ui_text</item>
+        <item name="colorSurfaceVariant">@color/ui_surface</item>
+        <item name="android:textColorPrimary">@color/ui_text</item>
+        <item name="android:textColorSecondary">@color/ui_muted</item>
+        <item name="colorOutline">@color/ui_border</item>
+        <item name="android:colorBackground">@color/ui_background</item>
+        <item name="android:windowBackground">@color/ui_background</item>
+        <item name="android:statusBarColor">@color/ui_background</item>
+        <item name="android:navigationBarColor">@color/ui_background</item>
+        <item name="android:windowLightStatusBar">@bool/ui_light_bars</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">@bool/ui_light_bars</item>
+        <item name="android:fontFamily">sans</item>
+        <item name="editTextStyle">@style/FoodNow.Input</item>
+        <item name="materialButtonStyle">@style/FoodNow.Button</item>
+    </style>
+    <style name="Theme.Project_FoodApp" parent="Base.Theme.Project_FoodApp" />
+    <style name="FoodNow.Input" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/bg_delivery_input</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/ui_text</item>
+        <item name="android:textColorHint">@color/ui_muted</item>
+    </style>
+    <style name="FoodNow.Button" parent="Widget.Material3.Button">
+        <item name="cornerRadius">14dp</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="FoodNow.Secondary" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">14dp</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:textColor">@color/ui_text</item>
+        <item name="strokeColor">@color/ui_border</item>
+    </style>
+    <style name="FoodNow.ScreenTitle" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/ui_text</item>
+    </style>
+    <style name="FoodNow.SectionTitle" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">19sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/ui_text</item>
+    </style>
+    <style name="FoodNow.Muted" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/ui_muted</item>
+    </style>
+    <style name="FoodNowTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="textAllCaps">false</item>
+    </style>
+</resources>

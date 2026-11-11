@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FoodNow - Quản trị</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <strong>FoodNow</strong>
+      <span>Bảng điều khiển quản trị</span>
+      <nav class="header-nav" aria-label="Cổng đăng nhập">
+        <a class="active" href="index.html">Quản trị</a>
+        <a href="shipper.html">Shipper</a>
+      </nav>
+      <button id="logout" type="button" hidden>Đăng xuất</button>
+    </header>
+
+    <main>
+      <section id="login" class="login-card">
+        <h1>Đăng nhập quản trị</h1>
+        <p>Dùng tài khoản Firebase đã được cấp quyền admin.</p>
+        <nav class="portal-nav" aria-label="Chọn cổng đăng nhập">
+          <a class="active" href="index.html">Quản trị</a>
+          <a href="shipper.html">Shipper</a>
+        </nav>
+        <form id="loginForm">
+          <label
+            >Email<input
+              id="email"
+              type="email"
+              autocomplete="username"
+              required
+          /></label>
+          <label
+            >Mật khẩu<input
+              id="password"
+              type="password"
+              autocomplete="current-password"
+              required
+          /></label>
+          <button type="submit">Đăng nhập</button>
+        </form>
+      </section>
+
+      <section id="dashboard" hidden>
+        <div class="page-head">
+          <div>
+            <span class="eyebrow">TỔNG QUAN</span>
+            <h1>Đơn hàng FoodNow</h1>
+            <p>Theo dõi đơn hàng theo thời gian thực.</p>
+          </div>
+          <span class="live-label">Đang cập nhật</span>
+        </div>
+
+        <div id="metrics" class="metrics"></div>
+
+        <div class="analytics">
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">HOẠT ĐỘNG</span>
+                <h2>Số đơn 7 ngày qua</h2>
+                <p>Theo ngày đặt, giờ địa phương.</p>
+              </div>
+            </div>
+            <div
+              id="chart"
+              class="chart"
+              role="img"
+              aria-label="Số đơn hàng trong 7 ngày qua"
+            ></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">TIẾN ĐỘ</span>
+                <h2>Trạng thái đơn</h2>
+                <p>Phân bổ toàn bộ đơn hàng.</p>
+              </div>
+            </div>
+            <div id="statusSummary"></div>
+          </article>
+        </div>
+
+        <article class="panel">
+          <div class="panel-head order-head">
+            <div>
+              <span class="eyebrow">DANH SÁCH</span>
+              <h2>Đơn hàng</h2>
+              <p id="count">Đang tải dữ liệu...</p>
+            </div>
+            <div class="filters">
+              <input
+                id="search"
+                type="search"
+                placeholder="Tìm mã đơn, người nhận, địa chỉ"
+                aria-label="Tìm đơn hàng"
+              />
+              <select id="statusFilter" aria-label="Lọc theo trạng thái">
+                <option value="all">Tất cả trạng thái</option>
+                <option value="SEARCHING">Đang tìm tài xế</option>
+                <option value="ACCEPTED">Tài xế đã nhận</option>
+                <option value="PICKED_UP">Đã lấy món</option>
+                <option value="DELIVERING">Đang giao</option>
+                <option value="COMPLETED">Đã hoàn tất</option>
+                <option value="CANCELLED">Đã hủy</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>ĐƠN HÀNG</th>
+                  <th>NGƯỜI NHẬN</th>
+                  <th>THỜI GIAN</th>
+                  <th>TỔNG TIỀN</th>
+                  <th>TRẠNG THÁI</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="orders"></tbody>
+            </table>
+          </div>
+          <p id="empty" class="table-empty" hidden>
+            Không có đơn hàng phù hợp.
+          </p>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <span class="eyebrow">ĐỐI TÁC</span>
+              <h2>Tài xế</h2>
+              <p>Duyệt hoặc tạm khóa tài khoản tài xế.</p>
+            </div>
+          </div>
+          <div id="adminDrivers" class="stack" aria-live="polite"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <span class="eyebrow">TÀI KHOẢN</span>
+              <h2>Người dùng</h2>
+              <p>Danh sách khách hàng và tài xế.</p>
+            </div>
+          </div>
+          <div id="adminUsers" class="stack" aria-live="polite"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head order-head">
+            <div>
+              <span class="eyebrow">DANH MỤC</span>
+              <h2>Thực đơn</h2>
+              <p>Bật/tắt cửa hàng, sửa món và trạng thái món.</p>
+            </div>
+          </div>
+          <div id="adminRestaurants" class="stack" aria-live="polite"></div>
+        </article>
+      </section>
+
+      <p id="message" class="message" role="alert"></p>
+    </main>
+
+    <footer>524H0098 - Nguyễn Hòa Khang</footer>
+
+    <script type="module" src="admin.js"></script>
+  </body>
+</html>

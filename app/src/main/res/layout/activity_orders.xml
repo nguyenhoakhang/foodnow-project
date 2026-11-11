@@ -1,0 +1,132 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/ordersRoot"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="?attr/colorSurface">
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:fillViewport="true">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:padding="20dp">
+            <TextView android:id="@+id/orderEyebrow" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:letterSpacing="0.12"
+                android:text="@string/driver_eyebrow" android:textColor="@color/ui_accent"
+                android:textSize="12sp" android:textStyle="bold" android:visibility="gone" />
+            <TextView android:id="@+id/orderTitle" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:text="@string/orders_title"
+                android:textAppearance="@style/FoodNow.ScreenTitle" />
+            <TextView android:id="@+id/orderSubtitle" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="6dp"
+                android:text="@string/driver_subtitle" android:textAppearance="@style/FoodNow.Muted"
+                android:visibility="gone" />
+            <LinearLayout android:id="@+id/orderTimeline" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:orientation="vertical"
+                android:layout_marginTop="16dp" android:visibility="gone" />
+            <TextView android:id="@+id/orderInfo" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="16dp"
+                android:accessibilityLiveRegion="polite"
+                android:background="@drawable/bg_search_foodnow" android:padding="20dp"
+                android:textSize="16sp" android:lineSpacingExtra="6dp" />
+            <Button android:id="@+id/orderAvailability" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:visibility="gone"
+                android:layout_marginTop="8dp" />
+            <Button android:id="@+id/orderOffers" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:text="@string/offers"
+                android:visibility="gone" android:layout_marginTop="8dp"
+                style="@style/FoodNow.Secondary" />
+            <LinearLayout android:id="@+id/driverJobs" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:orientation="vertical"
+                android:visibility="gone" />
+            <Button android:id="@+id/orderAdvance" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:visibility="gone"
+                android:layout_marginTop="8dp" />
+            <Button android:id="@+id/orderRelease" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:text="@string/release_order"
+                android:visibility="gone" android:layout_marginTop="8dp"
+                style="@style/FoodNow.Secondary" />
+            <Button android:id="@+id/orderCall" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:text="@string/call_recipient"
+                android:visibility="gone" android:layout_marginTop="8dp"
+                style="@style/FoodNow.Secondary" />
+            <Button android:id="@+id/orderMap" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:text="@string/open_delivery_map"
+                android:visibility="gone" android:layout_marginTop="8dp"
+                style="@style/FoodNow.Secondary" />
+            <Button android:id="@+id/orderTrack" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:text="@string/track_live"
+                android:visibility="gone" android:layout_marginTop="8dp"
+                style="@style/FoodNow.Secondary" />
+            <Button android:id="@+id/orderCancel" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:text="@string/cancel_order"
+                android:visibility="gone" android:layout_marginTop="8dp"
+                style="@style/FoodNow.Secondary" />
+            <LinearLayout android:id="@+id/chatPanel" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:orientation="vertical"
+                android:visibility="gone" android:layout_marginTop="24dp"
+                android:background="@drawable/bg_surface" android:padding="16dp">
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="@string/chat_title"
+                    android:textAppearance="@style/FoodNow.SectionTitle" />
+                <TextView android:id="@+id/chatMessages" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:paddingVertical="8dp"
+                    android:textSize="15sp" android:lineSpacingExtra="6dp" />
+                <LinearLayout android:id="@+id/chatBubbles" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:orientation="vertical"
+                    android:layout_marginTop="12dp" />
+                <Button android:id="@+id/chatOlder" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:text="@string/chat_older"
+                    android:layout_marginTop="8dp" style="@style/FoodNow.Secondary" />
+                <EditText android:id="@+id/chatInput" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:hint="@string/chat_hint"
+                    android:inputType="textCapSentences" android:maxLength="1000"
+                    android:background="@drawable/bg_delivery_input" android:padding="16dp"
+                    android:minHeight="56dp" android:layout_marginTop="12dp"
+                    android:textColor="@color/ui_text" android:textColorHint="@color/ui_muted" />
+                <Button android:id="@+id/chatSend" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:text="@string/chat_send"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+            <TextView android:id="@+id/ordersMessage" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:accessibilityLiveRegion="polite" />
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout android:id="@+id/driverNav" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:background="@drawable/bg_glass_nav"
+        android:orientation="horizontal" android:padding="6dp" android:visibility="gone">
+        <LinearLayout android:id="@+id/driverNavOrders" android:layout_width="0dp"
+            android:layout_height="64dp" android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless" android:clickable="true"
+            android:focusable="true" android:gravity="center" android:orientation="vertical">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp"
+                android:contentDescription="@null" android:src="@drawable/ic_ui_orders"
+                app:tint="@color/ui_accent" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="4dp" android:text="@string/ui_orders"
+                android:textColor="@color/ui_accent" android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/driverNavHistory" android:layout_width="0dp"
+            android:layout_height="64dp" android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless" android:clickable="true"
+            android:focusable="true" android:gravity="center" android:orientation="vertical">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp"
+                android:contentDescription="@null" android:src="@drawable/ic_ui_history"
+                app:tint="@color/ui_muted" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="4dp" android:text="@string/driver_nav_history"
+                android:textColor="@color/ui_muted" android:textSize="11sp" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/driverNavProfile" android:layout_width="0dp"
+            android:layout_height="64dp" android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless" android:clickable="true"
+            android:focusable="true" android:gravity="center" android:orientation="vertical">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp"
+                android:contentDescription="@null" android:src="@drawable/ic_ui_person"
+                app:tint="@color/ui_muted" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="4dp" android:text="@string/ui_account"
+                android:textColor="@color/ui_muted" android:textSize="11sp" />
+        </LinearLayout>
+    </LinearLayout>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:gravity="center" android:padding="10dp" android:text="@string/student_identity"
+        android:textSize="11sp" android:textColor="@color/ui_muted" />
+</LinearLayout>

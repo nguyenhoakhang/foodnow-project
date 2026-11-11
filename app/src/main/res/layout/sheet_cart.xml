@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@color/ui_background" android:padding="20dp">
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="@string/ui_cart_title" android:textAppearance="@style/FoodNow.ScreenTitle" />
+    <TextView android:id="@+id/cartRestaurant" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" android:textColor="@color/ui_muted" android:textSize="14sp" />
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="20dp" android:fillViewport="true">
+        <LinearLayout android:id="@+id/cartRows" android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+    <TextView android:id="@+id/cartSubtotal" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="16dp" android:textColor="@color/ui_text" android:textSize="21sp"
+        android:textStyle="bold" />
+    <Button android:id="@+id/cartCheckout" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/checkout_title" />
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center" android:text="@string/student_identity" android:textSize="11sp"
+        android:textColor="@color/ui_muted" />
+</LinearLayout>

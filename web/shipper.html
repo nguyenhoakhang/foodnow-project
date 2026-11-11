@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FoodNow - Shipper</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <strong>FoodNow</strong>
+      <span>Cổng shipper</span>
+      <nav class="header-nav" aria-label="Cổng đăng nhập">
+        <a href="index.html">Quản trị</a>
+        <a class="active" href="shipper.html">Shipper</a>
+      </nav>
+      <button id="logout" type="button" hidden>Đăng xuất</button>
+    </header>
+
+    <main>
+      <section id="login" class="login-card">
+        <h1>Đăng nhập shipper</h1>
+        <p>Dùng tài khoản tài xế đã được duyệt trong Firebase Console.</p>
+        <nav class="portal-nav" aria-label="Chọn cổng đăng nhập">
+          <a href="index.html">Quản trị</a>
+          <a class="active" href="shipper.html">Shipper</a>
+        </nav>
+        <form id="loginForm">
+          <label
+            >Email<input
+              id="email"
+              type="email"
+              autocomplete="username"
+              required
+          /></label>
+          <label
+            >Mật khẩu<input
+              id="password"
+              type="password"
+              autocomplete="current-password"
+              required
+          /></label>
+          <button type="submit">Đăng nhập</button>
+        </form>
+      </section>
+
+      <section id="dashboard" hidden>
+        <div class="page-head">
+          <div>
+            <span class="eyebrow">GIAO HÀNG</span>
+            <h1>Cổng shipper</h1>
+            <p>Theo dõi đơn chờ và cập nhật chuyến giao.</p>
+          </div>
+          <span id="driverState" class="live-label">Đang tải...</span>
+        </div>
+
+        <article class="panel">
+          <div class="panel-head order-head">
+            <div>
+              <span class="eyebrow">TRẠNG THÁI</span>
+              <h2 id="driverTitle">Tài khoản tài xế</h2>
+              <p id="driverDetail">Đang kiểm tra quyền tài xế...</p>
+            </div>
+            <button id="availability" type="button" hidden>Bật nhận đơn</button>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <span class="eyebrow">ĐƠN CHỜ</span>
+              <h2>Đơn chờ nhận</h2>
+              <p>
+                Đơn ưu tiên cho bạn hiển thị trước; sau 45 giây mở cho tất cả
+                tài xế.
+              </p>
+            </div>
+          </div>
+          <div id="offers" class="stack" aria-live="polite"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <span class="eyebrow">ĐANG GIAO</span>
+              <h2>Đơn đang thực hiện</h2>
+              <p>Xác nhận từng bước giao hàng.</p>
+            </div>
+          </div>
+          <div id="activeOrder" class="stack" aria-live="polite"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <span class="eyebrow">LỊCH SỬ</span>
+              <h2>Đơn đã giao</h2>
+              <p>Các đơn hoàn tất hoặc đã hủy.</p>
+            </div>
+          </div>
+          <div id="history" class="stack" aria-live="polite"></div>
+        </article>
+      </section>
+
+      <p id="message" class="message" role="alert"></p>
+    </main>
+
+    <footer>524H0098 - Nguyễn Hòa Khang</footer>
+
+    <script type="module" src="shipper.js"></script>
+  </body>
+</html>

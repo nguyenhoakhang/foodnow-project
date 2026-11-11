@@ -1,0 +1,313 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn() && request.auth.token.get('admin', false) == true;
+    }
+
+    function validText(value, maxLength) {
+      return value is string && value.size() > 0 && value.size() <= maxLength;
+    }
+
+    function restaurantOpen(restaurant) {
+      let local = request.time + duration.value(7, 'h');
+      let now = local.hours() * 60 + local.minutes();
+      let open = int(restaurant.openTime[0:2]) * 60 + int(restaurant.openTime[3:5]);
+      let close = int(restaurant.closeTime[0:2]) * 60 + int(restaurant.closeTime[3:5]);
+      return restaurant.active == true && restaurant.timezone == 'Asia/Ho_Chi_Minh'
+        && restaurant.openTime.matches('[0-2][0-9]:[0-5][0-9]') && open < 1440
+        && restaurant.closeTime.matches('[0-2][0-9]:[0-5][0-9]') && close < 1440
+        && open != close && (open < close ? now >= open && now < close : now >= open || now < close);
+    }
+
+    function validItem(item, restaurantId) {
+      let food = get(/databases/$(database)/documents/restaurants/$(restaurantId)/foods/$(item.id));
+      return item is map && item.keys().hasOnly(['id', 'name', 'price', 'quantity'])
+        && item.id is string && item.quantity is int && item.quantity >= 1 && item.quantity <= 99
+        && food.data.available == true && item.name == food.data.name
+        && item.price is int && item.price > 0 && item.price == food.data.price;
+    }
+
+    function itemTotal(items, index) {
+      return items.size() > index ? items[index].price * items[index].quantity : 0;
+    }
+
+    function validItems(items, restaurantId) {
+      return items is list && items.size() >= 1 && items.size() <= 4
+        && validItem(items[0], restaurantId)
+        && (items.size() < 2 || validItem(items[1], restaurantId))
+        && (items.size() < 3 || validItem(items[2], restaurantId))
+        && (items.size() < 4 || validItem(items[3], restaurantId));
+    }
+
+    match /users/{userId} {
+      allow update: if signedIn() && request.auth.uid == userId
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['name', 'phone', 'address'])
+        && validText(request.resource.data.name, 100)
+        && validText(request.resource.data.phone, 30)
+        && validText(request.resource.data.address, 300);
+      allow read: if signedIn() && (request.auth.uid == userId || isAdmin());
+      allow create: if signedIn() && request.auth.uid == userId
+        && request.resource.data.keys().hasAll(['role', 'name', 'phone', 'address', 'createdAt'])
+        && request.resource.data.keys().hasOnly(['role', 'name', 'phone', 'address', 'createdAt'])
+        && request.resource.data.role in ['customer', 'driver']
+        && validText(request.resource.data.name, 100)
+        && validText(request.resource.data.phone, 30)
+        && validText(request.resource.data.address, 300)
+        && request.resource.data.createdAt == request.time;
+      allow update: if signedIn() && resource.data.role == 'customer'
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['activeOrderId'])
+        && ((request.auth.uid == userId && ((!('activeOrderId' in resource.data)
+          && request.resource.data.activeOrderId is string
+          && !exists(/databases/$(database)/documents/orders/$(request.resource.data.activeOrderId))
+          && getAfter(/databases/$(database)/documents/orders/$(request.resource.data.activeOrderId)).data.customerId == userId)
+          || ('activeOrderId' in resource.data && !('activeOrderId' in request.resource.data)
+            && get(/databases/$(database)/documents/orders/$(resource.data.activeOrderId)).data.customerId == userId
+            && getAfter(/databases/$(database)/documents/orders/$(resource.data.activeOrderId)).data.status == 'CANCELLED')))
+          || ('activeOrderId' in resource.data && !('activeOrderId' in request.resource.data)
+            && get(/databases/$(database)/documents/orders/$(resource.data.activeOrderId)).data.driverId == request.auth.uid
+            && get(/databases/$(database)/documents/orders/$(resource.data.activeOrderId)).data.status == 'DELIVERING'
+            && getAfter(/databases/$(database)/documents/orders/$(resource.data.activeOrderId)).data.status == 'COMPLETED')
+          || ('activeOrderId' in resource.data && !('activeOrderId' in request.resource.data)
+            && get(/databases/$(database)/documents/orders/$(resource.data.activeOrderId)).data.driverId == request.auth.uid
+            && get(/databases/$(database)/documents/orders/$(resource.data.activeOrderId)).data.status in ['ACCEPTED', 'PICKED_UP', 'DELIVERING']
+            && getAfter(/databases/$(database)/documents/orders/$(resource.data.activeOrderId)).data.status == 'CANCELLED'));
+      allow delete: if false;
+    }
+
+    match /drivers/{driverId} {
+      allow read: if signedIn() && (request.auth.uid == driverId || isAdmin());
+      allow create: if signedIn() && request.auth.uid == driverId
+        && getAfter(/databases/$(database)/documents/users/$(driverId)).data.role == 'driver'
+        && request.resource.data.keys().hasAll(['vehicle', 'approved', 'available', 'createdAt'])
+        && request.resource.data.keys().hasOnly(['vehicle', 'approved', 'available', 'createdAt'])
+        && validText(request.resource.data.vehicle, 100)
+        && request.resource.data.approved == true
+        && request.resource.data.available == false
+        && request.resource.data.createdAt == request.time;
+      allow update: if signedIn() && (
+        (request.auth.uid == driverId
+          && resource.data.approved == true
+          && (
+            (!('activeOrderId' in resource.data)
+              && (
+                (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['available'])
+                  && request.resource.data.available is bool)
+                || (resource.data.available == true
+                  && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['activeOrderId'])
+                  && request.resource.data.activeOrderId is string
+                  && get(/databases/$(database)/documents/orders/$(request.resource.data.activeOrderId)).data.status == 'SEARCHING'
+                  && getAfter(/databases/$(database)/documents/orders/$(request.resource.data.activeOrderId)).data.driverId == driverId
+                  && getAfter(/databases/$(database)/documents/orders/$(request.resource.data.activeOrderId)).data.status == 'ACCEPTED')
+              )
+            )
+            || ('activeOrderId' in resource.data && !('activeOrderId' in request.resource.data)
+              && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['activeOrderId'])
+              && get(/databases/$(database)/documents/orders/$(resource.data.activeOrderId)).data.driverId == driverId
+              && (
+                (get(/databases/$(database)/documents/orders/$(resource.data.activeOrderId)).data.status == 'DELIVERING'
+                  && getAfter(/databases/$(database)/documents/orders/$(resource.data.activeOrderId)).data.status == 'COMPLETED')
+                || (get(/databases/$(database)/documents/orders/$(resource.data.activeOrderId)).data.status == 'ACCEPTED'
+                  && getAfter(/databases/$(database)/documents/orders/$(resource.data.activeOrderId)).data.status == 'SEARCHING')
+                || (get(/databases/$(database)/documents/orders/$(resource.data.activeOrderId)).data.status in ['ACCEPTED', 'PICKED_UP', 'DELIVERING']
+                  && getAfter(/databases/$(database)/documents/orders/$(resource.data.activeOrderId)).data.status == 'CANCELLED')
+              )
+            )
+          )
+        )
+        || ('activeOrderId' in resource.data && !('activeOrderId' in request.resource.data)
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['activeOrderId'])
+          && get(/databases/$(database)/documents/orders/$(resource.data.activeOrderId)).data.customerId == request.auth.uid
+          && get(/databases/$(database)/documents/orders/$(resource.data.activeOrderId)).data.driverId == driverId
+          && get(/databases/$(database)/documents/orders/$(resource.data.activeOrderId)).data.status == 'ACCEPTED'
+          && getAfter(/databases/$(database)/documents/orders/$(resource.data.activeOrderId)).data.status == 'CANCELLED')
+      );
+      allow update: if signedIn() && request.auth.uid == driverId
+        && resource.data.approved == false
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['available'])
+        && request.resource.data.available == false;
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['approved'])
+        && request.resource.data.approved is bool;
+      allow delete: if false;
+    }
+
+    match /deviceTokens/{userId} {
+      allow read: if signedIn() && request.auth.uid == userId;
+      allow create, update: if signedIn() && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly(['token', 'updatedAt'])
+        && request.resource.data.keys().hasAll(['token', 'updatedAt'])
+        && request.resource.data.token is string
+        && request.resource.data.token.size() >= 10 && request.resource.data.token.size() <= 4096
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if signedIn() && request.auth.uid == userId;
+    }
+
+    match /driverLocations/{driverId} {
+      allow read: if signedIn() && (request.auth.uid == driverId
+        || get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'customer');
+      allow create, update: if signedIn() && request.auth.uid == driverId
+        && get(/databases/$(database)/documents/drivers/$(driverId)).data.approved == true
+        && request.resource.data.keys().hasOnly(['latitude', 'longitude', 'available', 'updatedAt'])
+        && request.resource.data.keys().hasAll(['latitude', 'longitude', 'available', 'updatedAt'])
+        && request.resource.data.latitude is number && request.resource.data.latitude >= -90 && request.resource.data.latitude <= 90
+        && request.resource.data.longitude is number && request.resource.data.longitude >= -180 && request.resource.data.longitude <= 180
+        && request.resource.data.available is bool
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if signedIn() && request.auth.uid == driverId;
+    }
+
+    match /restaurants/{restaurantId} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+
+      match /foods/{foodId} {
+        allow read: if signedIn();
+        allow write: if isAdmin();
+      }
+    }
+
+    match /appConfig/public {
+      allow read: if signedIn();
+      allow write: if false;
+    }
+
+    match /orders/{orderId} {
+      allow get: if isAdmin() || (signedIn() && (resource == null || resource.data.customerId == request.auth.uid
+        || ('driverId' in resource.data && resource.data.driverId == request.auth.uid)));
+      allow list: if isAdmin() || (signedIn() && (resource.data.customerId == request.auth.uid
+        || ('driverId' in resource.data && resource.data.driverId == request.auth.uid)));
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['customerId', 'restaurantId', 'restaurantName', 'restaurantAddress', 'items', 'subtotal', 'deliveryFee', 'total', 'recipient', 'phone', 'address', 'note', 'deliveryLatitude', 'deliveryLongitude', 'paymentMethod', 'status', 'createdAt'])
+        && request.resource.data.customerId == request.auth.uid
+        && request.resource.data.restaurantId is string
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'customer'
+        && getAfter(/databases/$(database)/documents/users/$(request.auth.uid)).data.activeOrderId == orderId
+        && restaurantOpen(get(/databases/$(database)/documents/restaurants/$(request.resource.data.restaurantId)).data)
+        && request.resource.data.restaurantName == get(/databases/$(database)/documents/restaurants/$(request.resource.data.restaurantId)).data.name
+        && request.resource.data.restaurantAddress == get(/databases/$(database)/documents/restaurants/$(request.resource.data.restaurantId)).data.address
+        && validItems(request.resource.data.items, request.resource.data.restaurantId)
+        && request.resource.data.subtotal == itemTotal(request.resource.data.items, 0) + itemTotal(request.resource.data.items, 1) + itemTotal(request.resource.data.items, 2) + itemTotal(request.resource.data.items, 3)
+        && request.resource.data.deliveryFee == get(/databases/$(database)/documents/appConfig/public).data.deliveryFee
+        && request.resource.data.deliveryFee is int && request.resource.data.deliveryFee >= 0
+        && request.resource.data.total == request.resource.data.subtotal + request.resource.data.deliveryFee
+        && validText(request.resource.data.recipient, 100) && validText(request.resource.data.phone, 30)
+        && validText(request.resource.data.address, 300) && request.resource.data.note is string && request.resource.data.note.size() <= 500
+        && request.resource.data.paymentMethod == 'COD' && request.resource.data.status == 'SEARCHING'
+        && request.resource.data.createdAt == request.time
+        && getAfter(/databases/$(database)/documents/orderOffers/$(orderId)).data.status == 'SEARCHING';
+      allow update: if signedIn() && ((resource.data.customerId == request.auth.uid
+        && resource.data.status in ['SEARCHING', 'ACCEPTED']
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])
+        && request.resource.data.status == 'CANCELLED' && request.resource.data.updatedAt == request.time
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.activeOrderId == orderId
+        && !('activeOrderId' in getAfter(/databases/$(database)/documents/users/$(request.auth.uid)).data)
+        && (resource.data.status == 'SEARCHING' || !('activeOrderId' in getAfter(/databases/$(database)/documents/drivers/$(resource.data.driverId)).data))
+        && getAfter(/databases/$(database)/documents/orderOffers/$(orderId)).data.status == 'CANCELLED')
+        || (resource.data.status == 'SEARCHING'
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'driverId', 'updatedAt'])
+          && request.resource.data.status == 'ACCEPTED' && request.resource.data.driverId == request.auth.uid
+          && request.resource.data.updatedAt == request.time
+          && get(/databases/$(database)/documents/drivers/$(request.auth.uid)).data.approved == true
+          && get(/databases/$(database)/documents/drivers/$(request.auth.uid)).data.available == true
+          && (get(/databases/$(database)/documents/orderOffers/$(orderId)).data.targetDriverId == ''
+            || get(/databases/$(database)/documents/orderOffers/$(orderId)).data.targetDriverId == request.auth.uid
+            || request.time >= get(/databases/$(database)/documents/orderOffers/$(orderId)).data.createdAt + duration.value(45, 's'))
+          && !('activeOrderId' in get(/databases/$(database)/documents/drivers/$(request.auth.uid)).data)
+          && getAfter(/databases/$(database)/documents/drivers/$(request.auth.uid)).data.activeOrderId == orderId
+          && getAfter(/databases/$(database)/documents/orderOffers/$(orderId)).data.status == 'ACCEPTED'
+          && getAfter(/databases/$(database)/documents/orderOffers/$(orderId)).data.driverId == request.auth.uid)
+        || (resource.data.status == 'ACCEPTED' && resource.data.driverId == request.auth.uid
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'driverId', 'updatedAt'])
+          && request.resource.data.status == 'SEARCHING' && !('driverId' in request.resource.data)
+          && request.resource.data.updatedAt == request.time
+          && get(/databases/$(database)/documents/drivers/$(request.auth.uid)).data.activeOrderId == orderId
+          && !('activeOrderId' in getAfter(/databases/$(database)/documents/drivers/$(request.auth.uid)).data)
+          && getAfter(/databases/$(database)/documents/orderOffers/$(orderId)).data.status == 'SEARCHING'
+          && !('driverId' in getAfter(/databases/$(database)/documents/orderOffers/$(orderId)).data))
+        || (resource.data.status in ['ACCEPTED', 'PICKED_UP', 'DELIVERING']
+          && resource.data.driverId == request.auth.uid
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])
+          && request.resource.data.status == 'CANCELLED' && request.resource.data.updatedAt == request.time
+          && get(/databases/$(database)/documents/drivers/$(request.auth.uid)).data.activeOrderId == orderId
+          && get(/databases/$(database)/documents/users/$(resource.data.customerId)).data.activeOrderId == orderId
+          && !('activeOrderId' in getAfter(/databases/$(database)/documents/drivers/$(request.auth.uid)).data)
+          && !('activeOrderId' in getAfter(/databases/$(database)/documents/users/$(resource.data.customerId)).data)
+          && getAfter(/databases/$(database)/documents/orderOffers/$(orderId)).data.status == 'CANCELLED')
+        || (resource.data.driverId == request.auth.uid
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])
+          && request.resource.data.updatedAt == request.time
+          && get(/databases/$(database)/documents/drivers/$(request.auth.uid)).data.activeOrderId == orderId
+          && ((resource.data.status == 'ACCEPTED' && request.resource.data.status == 'PICKED_UP')
+            || (resource.data.status == 'PICKED_UP' && request.resource.data.status == 'DELIVERING')
+            || (resource.data.status == 'DELIVERING' && request.resource.data.status == 'COMPLETED'
+              && get(/databases/$(database)/documents/users/$(resource.data.customerId)).data.activeOrderId == orderId
+              && !('activeOrderId' in getAfter(/databases/$(database)/documents/users/$(resource.data.customerId)).data)
+              && !('activeOrderId' in getAfter(/databases/$(database)/documents/drivers/$(request.auth.uid)).data)))));
+      allow delete: if false;
+
+      match /messages/{messageId} {
+        function parentOrder() {
+          return get(/databases/$(database)/documents/orders/$(orderId)).data;
+        }
+        function participant() {
+          return signedIn() && (parentOrder().customerId == request.auth.uid
+            || ('driverId' in parentOrder() && parentOrder().driverId == request.auth.uid));
+        }
+        allow read: if participant();
+        allow create: if participant()
+          && parentOrder().status in ['ACCEPTED', 'PICKED_UP', 'DELIVERING']
+          && request.resource.data.keys().hasAll(['senderId', 'text', 'createdAt'])
+          && request.resource.data.keys().hasOnly(['senderId', 'text', 'createdAt'])
+          && request.resource.data.senderId == request.auth.uid
+          && validText(request.resource.data.text, 1000)
+          && request.resource.data.createdAt == request.time;
+        allow update, delete: if false;
+      }
+    }
+
+    match /orderOffers/{orderId} {
+      allow read: if signedIn() && get(/databases/$(database)/documents/drivers/$(request.auth.uid)).data.approved == true;
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['restaurantId', 'restaurantName', 'total', 'status', 'targetDriverId', 'createdAt'])
+        && request.resource.data.keys().hasAll(['restaurantId', 'restaurantName', 'total', 'status', 'targetDriverId', 'createdAt'])
+        && request.resource.data.status == 'SEARCHING' && request.resource.data.createdAt == request.time
+        && request.resource.data.targetDriverId is string && request.resource.data.targetDriverId.size() <= 128
+        && getAfter(/databases/$(database)/documents/orders/$(orderId)).data.customerId == request.auth.uid
+        && getAfter(/databases/$(database)/documents/orders/$(orderId)).data.restaurantId == request.resource.data.restaurantId
+        && getAfter(/databases/$(database)/documents/orders/$(orderId)).data.restaurantName == request.resource.data.restaurantName
+        && getAfter(/databases/$(database)/documents/orders/$(orderId)).data.total == request.resource.data.total;
+      allow update: if signedIn()
+        && request.resource.data.updatedAt == request.time
+        && ((resource.data.status in ['SEARCHING', 'ACCEPTED'] && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])
+          && request.resource.data.status == 'CANCELLED'
+          && getAfter(/databases/$(database)/documents/orders/$(orderId)).data.customerId == request.auth.uid
+          && getAfter(/databases/$(database)/documents/orders/$(orderId)).data.status == 'CANCELLED')
+          || (resource.data.status == 'SEARCHING' && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'driverId', 'updatedAt'])
+          && request.resource.data.status == 'ACCEPTED' && request.resource.data.driverId == request.auth.uid
+          && (resource.data.targetDriverId == ''
+            || resource.data.targetDriverId == request.auth.uid
+            || request.time >= resource.data.createdAt + duration.value(45, 's'))
+          && getAfter(/databases/$(database)/documents/orders/$(orderId)).data.driverId == request.auth.uid
+          && getAfter(/databases/$(database)/documents/orders/$(orderId)).data.status == 'ACCEPTED')
+          || (resource.data.status == 'ACCEPTED' && resource.data.driverId == request.auth.uid
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'driverId', 'updatedAt'])
+          && request.resource.data.status == 'SEARCHING' && !('driverId' in request.resource.data)
+          && getAfter(/databases/$(database)/documents/orders/$(orderId)).data.status == 'SEARCHING'
+          && !('driverId' in getAfter(/databases/$(database)/documents/orders/$(orderId)).data))
+          || (resource.data.status == 'ACCEPTED' && resource.data.driverId == request.auth.uid
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])
+          && request.resource.data.status == 'CANCELLED'
+          && getAfter(/databases/$(database)/documents/orders/$(orderId)).data.status == 'CANCELLED'));
+      allow delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="@color/ui_background" />
+        </shape>
+    </item>
+    <item android:height="1dp" android:gravity="top">
+        <shape>
+            <solid android:color="@color/ui_border" />
+        </shape>
+    </item>
+</layer-list>
